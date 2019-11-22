@@ -1,24 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import List from "./components/List";
+import Details from "./components/Details";
 
 function App() {
+  const [info, setInfo] = useState({ id: null, name: "" });
+
+  const handleInfo = (id, name) => {
+    setInfo({ id, name });
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="ui raised very padded text container segment">
+        <div className="ui grid">
+          <div className="eight wide column">
+            <List handleInfo={handleInfo} />
+          </div>
+          <div className="eight wide column">
+            {info ? <Details info={info} /> : null}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
